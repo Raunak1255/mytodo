@@ -29,7 +29,7 @@ const App = () => {
 
   const saveToDo = () => {
     axios
-      .post("http://localhost:5000/api/save", { toDo: input }, { timeout: 5000 })
+      .post("https://raunaktodoapi.onrender.com/api/save", { toDo: input }, { timeout: 5000 })
       .then((res) => {
         console.log(res.data);
         setUpdateUI((prevState) => !prevState);
