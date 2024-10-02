@@ -9,7 +9,7 @@ const Popup = ({ setShowPopup, popupContent, setUpdateUI }) => {
   const updateToDo = () => {
     axios
       // .put(`${baseURL}/update/${popupContent.id}`, { toDo: input })
-      .put(`http://localhost:5001/api/update/${popupContent.id}`, { toDo: input })
+      .put(`https://raunaktodoapi.onrender.com/api/update/${popupContent.id}`, { toDo: input })
       .then((res) => {
         console.log(res.data);
         setUpdateUI((prevState) => !prevState);
