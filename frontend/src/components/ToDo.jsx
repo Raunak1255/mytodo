@@ -7,7 +7,7 @@ import { baseURL } from "../utils/constant";
 const ToDo = ({ text, id, setUpdateUI, setShowPopup, setPopupContent }) => {
   const deleteTodo = () => {
     // axios.delete(`${baseURL}/delete/${id}`).then((res) => {
-    axios.delete(`http://localhost:5001/api/delete/${id}`).then((res) => {
+    axios.delete(`https://raunaktodoapi.onrender.com/api/delete/${id}`).then((res) => {
       console.log(res.data);
       setUpdateUI((prevState) => !prevState);
     });
