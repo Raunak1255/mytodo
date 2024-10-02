@@ -14,7 +14,7 @@ const App = () => {
   useEffect(() => {
     axios
       // .get(`${baseURL}/get`)
-      .get("http://localhost:5001/api/get")
+      .get("https://raunaktodoapi.onrender.com/api/get")
       .then((res) => setToDos(res.data))
       .catch((err) => console.log(err));
   }, [updateUI]);
@@ -22,7 +22,7 @@ const App = () => {
   const saveToDo = () => {
     axios
       // .post(`${baseURL}/save`, { toDo: input })
-      .post("http://localhost:5001/api/save", { toDo: input })
+      .post("https://raunaktodoapi.onrender.com/api/save", { toDo: input })
       .then((res) => {
         console.log(res.data);
         setUpdateUI((prevState) => !prevState);
