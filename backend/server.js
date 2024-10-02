@@ -7,13 +7,17 @@ const routes = require("./routes/ToDoRoutes");
 const cors = require("cors");
 
 const app = express();
-// const PORT = process.env.PORT || 5000;
 const DEFAULT_PORT = process.env.PORT || 5000;
-
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+
+const corsOptions = {
+  origin: "https://mynewtodo.vercel.app",
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.use(cors(corsOptions));
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -21,7 +25,6 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use("/api", routes);
-
 
 function startServer(port) {
   app.listen(port, () => {
@@ -37,5 +40,3 @@ function startServer(port) {
 }
 
 startServer(DEFAULT_PORT);
-
-// app.listen(PORT, () => console.log(`Listening at ${PORT}...`));
