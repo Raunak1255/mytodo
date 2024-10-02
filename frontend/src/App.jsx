@@ -13,22 +13,76 @@ const App = () => {
 
   useEffect(() => {
     axios
-      // .get(`${baseURL}/get`)
-      .get("https://raunaktodoapi.onrender.com/api/get")
+      .get("https://raunaktodoapi.onrender.com/api/get", { timeout: 5000 })
       .then((res) => setToDos(res.data))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error("Error fetching data:", err);
+        if (err.response) {
+          console.error("Response error:", err.response.data);
+        } else if (err.request) {
+          console.error("Request error:", err.request);
+        } else {
+          console.error("Error:", err.message);
+        }
+      });
   }, [updateUI]);
 
   const saveToDo = () => {
     axios
-      // .post(`${baseURL}/save`, { toDo: input })
-      .post("https://raunaktodoapi.onrender.com/api/save", { toDo: input })
+      .post("http://localhost:5000/api/save", { toDo: input }, { timeout: 5000 })
       .then((res) => {
         console.log(res.data);
         setUpdateUI((prevState) => !prevState);
         setInput("");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error("Error saving data:", err);
+        if (err.response) {
+          console.error("Response error:", err.response.data);
+        } else if (err.request) {
+          console.error("Request error:", err.request);
+        } else {
+          console.error("Error:", err.message);
+        }
+      });
+  };
+
+  const deleteToDo = (id) => {
+    axios
+      .delete(`https://raunaktodoapi.onrender.com/api/delete/${id}`, { timeout: 5000 })
+      .then((res) => {
+        console.log(res.data);
+        setUpdateUI((prevState) => !prevState);
+      })
+      .catch((err) => {
+        console.error("Error deleting data:", err);
+        if (err.response) {
+          console.error("Response error:", err.response.data);
+        } else if (err.request) {
+          console.error("Request error:", err.request);
+        } else {
+          console.error("Error:", err.message);
+        }
+      });
+  };
+
+  const editToDo = (id, updatedToDo) => {
+    axios
+      .put(`https://raunaktodoapi.onrender.com/api/edit/${id}`, { toDo: updatedToDo }, { timeout: 5000 })
+      .then((res) => {
+        console.log(res.data);
+        setUpdateUI((prevState) => !prevState);
+      })
+      .catch((err) => {
+        console.error("Error editing data:", err);
+        if (err.response) {
+          console.error("Response error:", err.response.data);
+        } else if (err.request) {
+          console.error("Request error:", err.request);
+        } else {
+          console.error("Error:", err.message);
+        }
+      });
   };
 
   return (
@@ -55,6 +109,8 @@ const App = () => {
               setUpdateUI={setUpdateUI}
               setShowPopup={setShowPopup}
               setPopupContent={setPopupContent}
+              deleteToDo={deleteToDo}
+              editToDo={editToDo}
             />
           ))}
         </div>
