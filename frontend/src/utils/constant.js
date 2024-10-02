@@ -1,3 +1,3 @@
-export const baseURL = `https://raunaktodoapi.onrender.com/api`
+export const baseURL = `https://raunaktodoapi.onrender.com/`
 
 
